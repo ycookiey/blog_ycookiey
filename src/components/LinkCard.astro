@@ -1,0 +1,37 @@
+---
+import ogs from 'open-graph-scraper';
+
+interface Props {
+  url: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  internal?: boolean; // 将来的に内部リンクブログカード対応も考慮（今回は未使用）
+}
+
+const { url, title: customTitle, description: customDesc, image: customImage } = Astro.props;
+
+let ogData: any = {};
+try {
+  const { result } = await ogs({ url });
+  ogData = result;
+} catch (e) {
+  console.error('[LinkCard] Failed to fetch OGP:', url);
+}
+
+const title = customTitle || ogData?.ogTitle || ogData?.twitterTitle || url;
+const description = customDesc || ogData?.ogDescription || ogData?.twitterDescription || '';
+const image = customImage || ogData?.ogImage?.[0]?.url || ogData?.twitterImage?.[0]?.url || '';
+const imageAlt = ogData?.ogImage?.[0]?.alt || title;
+---
+
+<div class="link-card">
+  <a href={url} target="_blank" rel="noopener noreferrer" class="link-card-inner">
+    <div class="link-card-content">
+      <div class="link-card-title">{title}</div>
+      <div class="link-card-description">{description}</div>
+      <div class="link-card-url">{url}</div>
+    </div>
+    {image && <img src={image} alt={imageAlt} class="link-card-image" />}
+  </a>
+</div>
