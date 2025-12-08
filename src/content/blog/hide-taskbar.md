@@ -8,7 +8,9 @@ Windowsには「タスクバーを自動的に隠す」オプションがあり�
 
 そこで、タスクバーを常に非表示にするツールを作成しました。
 
-<https://github.com/ycookiey/HideTaskBar-temp>
+import LinkCard from '../../components/LinkCard.astro';
+
+<LinkCard url="https://github.com/ycookiey/HideTaskBar-temp" />
 
 とはいえ、常に非表示だと不都合もあるので、Windowsキーを押したときだけ一時的にタスクバーを表示するようにしています。
 
@@ -16,4 +18,4 @@ Windowsには「タスクバーを自動的に隠す」オプションがあり�
 
 ## 参考
 
-<https://manga-one.com/manga/55/chapter/25522?type=chapter&sort_type=desc&page=35&limit=10>
+<LinkCard url="https://manga-one.com/manga/55/chapter/25522?type=chapter&sort_type=desc&page=35&limit=10" />
